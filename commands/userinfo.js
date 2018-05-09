@@ -24,7 +24,7 @@ exports.run = async (bot, message, args) => {
 		.addField("Status:", `${user.presence.status}`, true)
 		.addField("Game:", `${user.presence.game ? user.presence.game.name : 'None'}`, true)
 		.addField("Roles:", member.roles.map(roles => `${roles.name}`).join(', '), true)
-		.setFooter(`Replying to ${message.author.username}#${message.author.discriminator}`)
+		.setFooter(`Information Of ${message.author.username}#${message.author.discriminator}`)
      message.channel.send({embed});
 
 }

@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
     let embed = new Discord.RichEmbed()
     .setTitle("Ping-Pong!")
     .addField(":ping_pong: Pong!", `${Date.now() - message.createdTimestamp}ms`, true)
-    .addField(":desktop: API", `${Date.now() - then}Ms`, true)
+    .addField(":desktop: API", `${bot.ping}Ms`, true)
     .setFooter(`Ping Of ${message.author.tag}`)
 
     message.channel.send(embed);

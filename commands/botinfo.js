@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const { version } = require("discord.js");
-const moment = require("moment");
 let os = require('os')
 const cpu = process.cpuUsage().system / 1024 / 1024;
 const used = process.memoryUsage().heapUsed / 1024 / 1024;

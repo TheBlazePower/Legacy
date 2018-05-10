@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client({disableEveryone: true});
 const prefix = `.`
-client.commands = new Discord.Collection();
+bot.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -17,13 +17,13 @@ fs.readdir("./commands/", (err, files) => {
     delete require.cache[require.resolve(`./commands/${f}`)];
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded!`);
-    client.commands.set(props.help.name, props);
+    bot.commands.set(props.help.name, props);
   });
 });
 
 client.on("ready", async () => {
   console.log(`${client.user.username} Sudah Online CutePeople_#7627`);
-  client.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
+  bot.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
 
 });
 
@@ -72,7 +72,7 @@ client.on("guildMemberAdd", async member => {
       .addField(`Welcome To Our:`, `${member.guild.name} | **Server**`)
       .addField("Commands:", "**.help For Help Page**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
@@ -90,14 +90,14 @@ client.on("guildMemberRemove", async member => {
       .addField("Name:", `${member}`)
       .addField(`Lefting Our:`, `${member.guild.name}` + " | **Server**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
 });
 
 client.on("message", async message => {
-  if(message.author.client) return message.author.send("I Can't Send A Message With Your Command In My DM");
+  if(message.author.bot) return message.author.send("I Can't Send A Message With Your Command In My DM");
   if(message.channel.type === "dm") return;
   let sender = message.author;
   if (!message.content.startsWith(prefix)) return;
@@ -105,7 +105,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-  let commandfile = client.commands.get(cmd.slice(prefix.length));
+  let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(client,message,args);
 
   if (message.content === '<@440303006970413057>') {

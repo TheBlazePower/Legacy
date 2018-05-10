@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args, tools) => {
+module.exports.run = async (client, message, args, tools) => {
 
   message.delete()
   if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Maaf sobat, kamu tidak bisa melakukan itu.");

@@ -3,7 +3,7 @@ const fs = require("fs");
 const ms = require("ms");
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 
   //!warn @daeshan <reason>
   if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("No can do pal!");

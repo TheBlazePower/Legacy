@@ -4,7 +4,7 @@ let os = require('os')
 const cpu = process.cpuUsage().system / 1024 / 1024;
 const used = process.memoryUsage().heapUsed / 1024 / 1024;
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
     message.delete()
     let bicon = bot.user.displayAvatarURL;
     let botembed = new Discord.RichEmbed()

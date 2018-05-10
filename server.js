@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client({disableEveryone: true});
 const prefix = `.`
-bot.commands = new Discord.Collection();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -17,7 +17,7 @@ fs.readdir("./commands/", (err, files) => {
     delete require.cache[require.resolve(`./commands/${f}`)];
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded!`);
-    bot.commands.set(props.help.name, props);
+    client.commands.set(props.help.name, props);
   });
 });
 
@@ -105,7 +105,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
+  let commandfile = client.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(client,message,args);
 
   if (message.content === '<@440303006970413057>') {

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const weather = require("weather-js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 
   weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.
       if (err) message.channel.send(err);

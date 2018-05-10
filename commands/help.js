@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
     message.delete()
     let botembed = new Discord.RichEmbed()
     .setTitle(`${bot.user.username}, Command List`)

@@ -1,7 +1,7 @@
 //Define discord-js
 const Discord = require('discord.js');
 
-exports.run = async (bot, message, args) => {
+exports.run = async (client, message, args) => {
 	let user;
 	// If the user mentions someone, display their stats. If they just run userinfo without mentions, it will show their own stats.
     if (message.mentions.users.first()) {

@@ -10,13 +10,13 @@ module.exports.run = async (client, message, args) => {
     if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
 
     let kickEmbed = new Discord.RichEmbed()
-    .setTitle(`${bot.user.username} Attention :warning:`)
+    .setTitle(`${client.user.username} Attention :warning:`)
     .setDescription("==========================================")
     .setColor("#e56b00")
     .addField("Kicked User", `${kUser}`, true)
     .addField("Kicked By", `<@${message.author.id}>`, true)
     .addField("Reason", kReason, true)
-    .setFooter(`${bot.user.username}, Was Currently BETA Mode`);
+    .setFooter(`${client.user.username}, Was Currently BETA Mode`);
 
     let kickChannel = message.guild.channels.find(`name`, "mod-log");
     if(!kickChannel) return message.channel.send("Can't find mod-log channel.");

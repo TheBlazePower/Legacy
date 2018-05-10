@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const bot = new Discord.Client({disableEveryone: true});
+const client = new Discord.Client({disableEveryone: true});
 const prefix = `.`
-bot.commands = new Discord.Collection();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -17,29 +17,29 @@ fs.readdir("./commands/", (err, files) => {
     delete require.cache[require.resolve(`./commands/${f}`)];
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded!`);
-    bot.commands.set(props.help.name, props);
+    client.commands.set(props.help.name, props);
   });
 });
 
-bot.on("ready", async () => {
-  console.log(`${bot.user.username} Sudah Online CutePeople_#7627`);
-  bot.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
+client.on("ready", async () => {
+  console.log(`${client.user.username} Sudah Online CutePeople_#7627`);
+  client.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
 
 });
 
 // 1) ES6 introduces shorter, optional arrow functions
-bot.on('typingStart', (channel, user) => {
+client.on('typingStart', (channel, user) => {
   console.log(`${user.username} is typing in ${channel.name}`);
 
 });
 
 // 1) ES6 introduces shorter, optional arrow functions
-bot.on('typingStop', (channel, user) => {
+client.on('typingStop', (channel, user) => {
   console.log(`${user.username} Just Send A Message In ${channel.name}`);
 
 });
 
-bot.on(`guildBanAdd`, (guild, user) => {
+client.on(`guildBanAdd`, (guild, user) => {
   console.log(`${user.username} Has Been Banned`);
 
   let listchannel = guild.channels.find(`name`, "blacklisted")
@@ -47,7 +47,7 @@ bot.on(`guildBanAdd`, (guild, user) => {
 
 });
 
-bot.on(`guildBanRemove`, (guild, user) => {
+client.on(`guildBanRemove`, (guild, user) => {
   console.log(`${user.username} Has Been Unbanned`);
 
   let listchannel = guild.channels.find(`name`, "blacklisted")
@@ -55,7 +55,7 @@ bot.on(`guildBanRemove`, (guild, user) => {
 
 });
 
-bot.on("guildMemberAdd", async member => {
+client.on("guildMemberAdd", async member => {
   console.log(`${member} Has Joined Server.`);
 
   var role = member.guild.roles.find(`name`, "Member");
@@ -72,13 +72,13 @@ bot.on("guildMemberAdd", async member => {
       .addField(`Welcome To Our:`, `${member.guild.name} | **Server**`)
       .addField("Commands:", "**.help For Help Page**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
 });
 
-bot.on("guildMemberRemove", async member => {
+client.on("guildMemberRemove", async member => {
   console.log(`${member.id} Has Left Server.`);
 
   let channel = member.guild.channels.find(`name`, "join-left");
@@ -90,14 +90,14 @@ bot.on("guildMemberRemove", async member => {
       .addField("Name:", `${member}`)
       .addField(`Lefting Our:`, `${member.guild.name}` + " | **Server**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
 });
 
-bot.on("message", async message => {
-  if(message.author.bot) return message.author.send("I Can't Send A Message With Your Command In My DM");
+client.on("message", async message => {
+  if(message.author.client) return message.author.send("I Can't Send A Message With Your Command In My DM");
   if(message.channel.type === "dm") return;
   let sender = message.author;
   if (!message.content.startsWith(prefix)) return;
@@ -105,8 +105,8 @@ bot.on("message", async message => {
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  if(commandfile) commandfile.run(bot,message,args);
+  let commandfile = client.commands.get(cmd.slice(prefix.length));
+  if(commandfile) commandfile.run(client,message,args);
 
   if (message.content === '<@440303006970413057>') {
   message.channel.send('Yes?, What Can I Help You?');
@@ -178,4 +178,4 @@ bot.on("message", async message => {
   }
 });
 
-bot.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);

@@ -1,6 +1,6 @@
 const Discord = require('discord.js'); 
  
-module.exports.run = (bot, message, args, tools) => {
+module.exports.run = (client, message, args, tools) => {
  
   let pages = ['This is page one!', 'Second page', 'Third', 'You can add pages', 'All you need to do is add another item in the array', '**Supports markdown and regular chat description properties**']; 
   let page = 1; 

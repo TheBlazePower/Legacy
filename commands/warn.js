@@ -32,7 +32,7 @@ module.exports.run = async (client, message, args) => {
   .addField("Warned In:", message.channel, true)
   .addField("Number of Warnings:", warns[wUser.id].warns, true)
   .addField("Reason:", reason, true)
-  .setFooter(`${bot.user.username}, Was Currently BETA Mode`);
+  .setFooter(`${client.user.username}, Was Currently BETA Mode`);
 
   let warnchannel = message.guild.channels.find(`name`, "mod-log");
   if(!warnchannel) return message.reply("Couldn't find mod-log channel");

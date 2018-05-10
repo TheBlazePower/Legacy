@@ -97,7 +97,7 @@ bot.on("guildMemberRemove", async member => {
 });
 
 bot.on("message", async message => {
-  if(message.author.bot) return;
+  if(message.author.bot) return message.author.send("I Can't Send A Message With Your Command In My DM");
   if(message.channel.type === "dm") return;
   let sender = message.author;
   if (!message.content.startsWith(prefix)) return;

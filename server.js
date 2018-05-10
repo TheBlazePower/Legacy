@@ -23,7 +23,7 @@ fs.readdir("./commands/", (err, files) => {
 
 client.on("ready", async () => {
   console.log(`${client.user.username} Sudah Online CutePeople_#7627`);
-  bot.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
+  client.user.setActivity("Type: .help for Help List", {type: "PLAYING"});
 
 });
 
@@ -72,7 +72,7 @@ client.on("guildMemberAdd", async member => {
       .addField(`Welcome To Our:`, `${member.guild.name} | **Server**`)
       .addField("Commands:", "**.help For Help Page**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
@@ -90,14 +90,14 @@ client.on("guildMemberRemove", async member => {
       .addField("Name:", `${member}`)
       .addField(`Lefting Our:`, `${member.guild.name}` + " | **Server**")
       .addField("The Server Is Now:", `${member.guild.memberCount}` + " **members**")
-      .setFooter(`${bot.user.username}, Was Currently BETA Mode`)
+      .setFooter(`${client.user.username}, Was Currently BETA Mode`)
       .setTimestamp();
   channel.send(embed);
 
 });
 
 client.on("message", async message => {
-  if(message.author.bot) return message.author.send("I Can't Send A Message With Your Command In My DM");
+  if(message.author.client) return;
   if(message.channel.type === "dm") return;
   let sender = message.author;
   if (!message.content.startsWith(prefix)) return;

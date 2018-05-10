@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
     .setColor("#15f153")
     .addField("General:", "**==========================================** \n`.botinfo` \n`.serverinfo` \n`.legacycraft apakah <text>` \n`.help` \n`.ping` \n`.quiz` \n`.report <@user> <reason>` \n`.userinfo <@user>` \n`.weather <city>` \n**==========================================**")
     .addField("Moderator:", "**==========================================** \n`.addrole <@user> <role>` \n`.ban <@user> <reason>` \n`.appeal <reason>` \n`.clear <1-100>` \n`.kick <@user> <reason>` \n`.removerole <@user> <role>` \n`.say <text>` \n`.warn <@user> <reason>` \n`.warnlevel <@user>` \n**==========================================**")
-    .setFooter(`${bot.user.username} | Official CutePeople Bot, Was Currently BETA Mode`);
+    .setFooter(`${client.user.username} | Official CutePeople Bot, Was Currently BETA Mode`);
 
     message.author.send(`Please Wait To Sending Help Page`).then(msg => msg.edit(botembed));
 

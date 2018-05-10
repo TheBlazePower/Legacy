@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args) => {
     if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
 
     let kickEmbed = new Discord.RichEmbed()
-    .setTitle(`${client.user.username} Attention :warning:`)
+    .setTitle(`${message.guild.name} Attention :warning:`)
     .setDescription("==========================================")
     .setColor("#e56b00")
     .addField("Kicked User", `${kUser}`, true)
